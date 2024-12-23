@@ -34,7 +34,7 @@ export abstract class UI {
      * @param {PageFlip} app - PageFlip instanse
      * @param {FlipSetting} setting - Configuration object
      */
-    protected constructor(inBlock: HTMLElement, app: PageFlip, setting: FlipSetting) {
+    protected constructor (inBlock: HTMLElement, app: PageFlip, setting: FlipSetting) {
         this.parentElement = inBlock;
 
         inBlock.classList.add('stf__parent');
@@ -130,6 +130,7 @@ export abstract class UI {
         window.removeEventListener('resize', this.onResize);
 
         this.distElement.removeEventListener('mousedown', this.onMouseDown);
+        this.distElement.removeEventListener('mouseenter', this.onMouseEnter);
         this.distElement.removeEventListener('touchstart', this.onTouchStart);
         window.removeEventListener('mousemove', this.onMouseMove);
         window.removeEventListener('touchmove', this.onTouchMove);
@@ -142,6 +143,7 @@ export abstract class UI {
         if (!this.app.getSettings().useMouseEvents) return;
 
         this.distElement.addEventListener('mousedown', this.onMouseDown);
+        this.distElement.addEventListener('mouseenter', this.onMouseEnter);
         this.distElement.addEventListener('touchstart', this.onTouchStart);
         window.addEventListener('mousemove', this.onMouseMove);
         window.addEventListener('touchmove', this.onTouchMove, {
@@ -176,6 +178,12 @@ export abstract class UI {
         return true;
     }
 
+    private onMouseEnter = (e: MouseEvent): void => {
+        const pos = this.getMousePos(e.clientX, e.clientY);
+
+        this.app.userEnter(pos, e);
+    }
+
     private onMouseDown = (e: MouseEvent): void => {
         if (this.checkTarget(e.target)) {
             const pos = this.getMousePos(e.clientX, e.clientY);
@@ -183,6 +191,7 @@ export abstract class UI {
             this.app.startUserTouch(pos);
 
             e.preventDefault();
+            this.onMouseEnter(e)
         }
     };
 

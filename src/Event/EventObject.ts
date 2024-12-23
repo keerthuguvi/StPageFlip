@@ -3,13 +3,13 @@ import { PageFlip } from '../PageFlip';
 /**
  * Data type passed to the event handler
  */
-export type DataType = number | string | boolean | object;
+export type DataType = number | string | boolean | object |  MouseEvent | TouchEvent;
 
 /**
  * Type of object in event handlers
  */
 export interface WidgetEvent {
-    data: DataType;
+    data?: DataType;
     object: PageFlip;
 }
 

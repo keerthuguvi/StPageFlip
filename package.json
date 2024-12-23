@@ -1,8 +1,10 @@
 {
-  "name": "page-flip",
-  "version": "2.0.7",
+  "name": "@keerthanask/page-flip",
+  "private": false,
+  "version": "2.0.8",
   "main": "dist/js/page-flip.browser.js",
   "browser": "dist/js/page-flip.browser.js",
+  "types": "./index.d.ts",
   "author": "oleg.litovski9@gmail.com",
   "license": "MIT",
   "description": "Powerful, simple and flexible JS Library for creating realistic and beautiful page turning effect",
@@ -35,6 +37,11 @@
     "build-global": "npx webpack",
     "build": "rollup -c"
   },
+  "files": [
+  "./dist/**/*.js",
+  "./dist/**/*.ts",
+  "index.d.ts"
+  ],
   "keywords": [
     "typescript",
     "page",

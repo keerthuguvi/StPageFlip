@@ -42,7 +42,7 @@ export class PageFlip extends EventObject {
      * @param {HTMLElement} inBlock - Root HTML Element
      * @param {Object} setting - Configuration object
      */
-    constructor(inBlock: HTMLElement, setting: Partial<FlipSetting>) {
+    constructor (inBlock: HTMLElement, setting: Partial<FlipSetting>) {
         super();
 
         this.setting = new Settings().getSettings(setting);
@@ -394,6 +394,13 @@ export class PageFlip extends EventObject {
                 if (!this.isUserMove) this.flipController.flip(pos);
                 else this.flipController.stopMove();
             }
+        }
+    }
+
+
+    public userEnter(pos: Point, event: MouseEvent | TouchEvent): void {
+        if (!this.flipController.isPointOnCorners(pos) && this.isUserTouch) {
+            this.trigger('zoom-event', this, event)
         }
     }
 }

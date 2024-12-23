@@ -429,7 +429,7 @@ export class Flip {
         return false;
     }
 
-    private isPointOnCorners(globalPos: Point): boolean {
+    isPointOnCorners(globalPos: Point): boolean {
         const rect = this.getBoundsRect();
         const pageWidth = rect.pageWidth;
 
